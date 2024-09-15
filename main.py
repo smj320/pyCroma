@@ -21,9 +21,10 @@ Page0 = 10000
 
 # Zoomのトリミング領域　背景画像は　16：9 => 1.78
 x0 = int(config_ini['CROP']['x0'])
-x1 = int(config_ini['CROP']['x1'])
 y0 = int(config_ini['CROP']['y0'])
-y1 = int(config_ini['CROP']['y1'])
+w0 = int(config_ini['CROP']['w0'])
+h0 = int(config_ini['CROP']['h0'])
+
 
 def filename(nn):
     fn = "img/%05d.png" % nn
@@ -32,8 +33,7 @@ def filename(nn):
 
 def shot(nn):
     # 画像ポイント
-    [xc0, yc0] = [(x0 + x1) / 2, (y0 + y1) / 2]
-    [w0, h0] = [x1 - x0, y1 - y0]
+    [xc0, yc0] = [x0 + w0 / 2, y0 + h0 / 2]
 
     # 切り取り位置
     [w, h] = [h0 * 1.41, h0]
@@ -50,7 +50,8 @@ def shot(nn):
     # 文字
     font = ImageFont.truetype('ipaexm.ttf', 60)
     draw = ImageDraw.Draw(dstImg)
-    draw.text((CX0, XY0), "2024-09-23 極地研究所一般公開", font=font, stroke_width=2, fill=(0, 69, 181))
+    fcolor = (255, 255, 255)
+    draw.text((CX0, XY0), "2024-09-23 極地研究所一般公開", font=font, stroke_width=2, fill=fcolor)
 
     # 画像出力
     fn = filename(nn)
