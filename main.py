@@ -20,10 +20,10 @@ config_ini.read('config.ini', encoding='utf-8')
 Page0 = 10000
 
 # Zoomのトリミング領域　背景画像は　16：9 => 1.78
-x0 = int(config_ini['CROP']['x0'])
-y0 = int(config_ini['CROP']['y0'])
-w0 = int(config_ini['CROP']['w0'])
-h0 = int(config_ini['CROP']['h0'])
+xo = int(config_ini['CROP']['x0'])
+yo = int(config_ini['CROP']['y0'])
+wo = int(config_ini['CROP']['w0'])
+ho = int(config_ini['CROP']['h0'])
 
 
 def filename(nn):
@@ -33,29 +33,29 @@ def filename(nn):
 
 def shot(nn):
     # 画像ポイント
-    [xc0, yc0] = [x0 + w0 / 2, y0 + h0 / 2]
+    [xc0, yc0] = [xo + wo / 2, yo + ho / 2]
 
     # 切り取り位置
-    [w, h] = [h0 * 1.41, h0]
-    [X0, Y0] = [xc0 - w / 2, yc0 - h / 2]
-    [X1, Y1] = [xc0 + w / 2, yc0 + h / 2]
-    [CX0, XY0] = [w * 0.05, h * 0.07]
+    [w, h] = [ho * 1.41, ho]
+    [x0, y0] = [xc0 - w / 2, yc0 - h / 2]
+    [x1, y1] = [xc0 + w / 2, yc0 + h / 2]
+    [cx0, cy0] = [w * 0.05, h * 0.07]  # 文字表示位置
 
     # スクショ
-    srcImg = pyautogui.screenshot()
+    src_img = pyautogui.screenshot()
 
     # 切り取り
-    dstImg = srcImg.crop((X0, Y0, X1, Y1))
+    dst_img = src_img.crop((x0, y0, x1, y1))
 
     # 文字
     font = ImageFont.truetype('ipaexm.ttf', 60)
-    draw = ImageDraw.Draw(dstImg)
+    draw = ImageDraw.Draw(dst_img)
     fcolor = (255, 255, 255)
-    draw.text((CX0, XY0), "2024-09-23 極地研究所一般公開", font=font, stroke_width=2, fill=fcolor)
+    draw.text((cx0, cy0), "2024-09-23 極地研究所一般公開", font=font, stroke_width=2, fill=fcolor)
 
     # 画像出力
     fn = filename(nn)
-    dstImg.save(fn)
+    dst_img.save(fn)
 
 
 def get_pages():
@@ -84,7 +84,7 @@ def img_print(nn):
     fn = filename(nn)
     cmd = 'lpr %s  -o PageSize=Postcard' % fn
     print(cmd)
-    # subprocess.call('lpr shot.png  -o PageSize=Postcard', shell=True)
+    subprocess.call(cmd, shell=True)
 
 
 def main():
