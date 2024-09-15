@@ -95,8 +95,8 @@ def main():
         if val == '':
             nn = get_pages()
             shot(nn)
-            # img_print(nn)
-            print("Print %d" % nn)
+            img_print(nn)
+            # print("Print %d" % nn)
             nn += 1
             set_pages(nn)
         elif val == '1' or val == '2' or val == '3':
