@@ -1,6 +1,7 @@
 #
 # pipの復元 pip install -r requirements.txt
 # OS操作, 中でPillowを使うのでモジュールはインストールしておく。
+import configparser
 import pyautogui
 # 画像操作
 from PIL import ImageDraw, ImageFont
@@ -9,11 +10,20 @@ import os
 # lpr実行用
 import subprocess
 
-# Zoomのトリミング領域　背景画像は　16：9 => 1.78
-[x0, y0, x1, y1] = [8, 384, 3097, 2121]
+#
+# config読込
+#
+config_ini = configparser.ConfigParser()
+config_ini.read('config.ini', encoding='utf-8')
+
 # ファイル番号の初期値
 Page0 = 10000
 
+# Zoomのトリミング領域　背景画像は　16：9 => 1.78
+x0 = int(config_ini['CROP']['x0'])
+x1 = int(config_ini['CROP']['x1'])
+y0 = int(config_ini['CROP']['y0'])
+y1 = int(config_ini['CROP']['y1'])
 
 def filename(nn):
     fn = "img/%05d.png" % nn
@@ -21,9 +31,6 @@ def filename(nn):
 
 
 def shot(nn):
-    # 元位置パラメータ
-    # [x0, y0, x1, y1] = [8, 384, 3097, 2121]
-
     # 画像ポイント
     [xc0, yc0] = [(x0 + x1) / 2, (y0 + y1) / 2]
     [w0, h0] = [x1 - x0, y1 - y0]

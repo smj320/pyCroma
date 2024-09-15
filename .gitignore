@@ -2,3 +2,4 @@
 /img/*.png
 /.venv
 /shot.txt
+/config.ini
