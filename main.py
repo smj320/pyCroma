@@ -1,4 +1,4 @@
-#
+# pipの保存 pip freeze > requirements.txt
 # pipの復元 pip install -r requirements.txt
 # OS操作, 中でPillowを使うのでモジュールはインストールしておく。
 import configparser
