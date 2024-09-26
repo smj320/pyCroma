@@ -51,7 +51,7 @@ def shot(nn):
     font = ImageFont.truetype('ipaexm.ttf', 60)
     draw = ImageDraw.Draw(dst_img)
     fcolor = (255, 255, 255)
-    draw.text((cx0, cy0), "2024-09-23 極地研究所一般公開", font=font, stroke_width=2, fill=fcolor)
+    draw.text((cx0, cy0), "2024-09-27 極地研究所一般公開", font=font, stroke_width=2, fill=fcolor)
 
     # 画像出力
     fn = filename(nn)
