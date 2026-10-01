@@ -49,7 +49,7 @@ def shot(nn):
 
     # 文字
     # font = ImageFont.truetype('ipaexm.ttf', 60)
-    font = ImageFont.truetype('ipaexm.ttf', 30)
+    font = ImageFont.truetype('ipaexm.ttf', 50)
     draw = ImageDraw.Draw(dst_img)
     fcolor = (255, 255, 255)
     draw.text((cx0, cy0), "2026-10-03 極地研究所一般公開", font=font, stroke_width=1, fill=fcolor)
@@ -96,7 +96,7 @@ def main():
         if val == '':
             nn = get_pages()
             shot(nn)
-            img_print(nn)
+            # img_print(nn)
             # print("Print %d" % nn)
             nn += 1
             set_pages(nn)
