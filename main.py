@@ -48,10 +48,11 @@ def shot(nn):
     dst_img = src_img.crop((x0, y0, x1, y1))
 
     # 文字
-    font = ImageFont.truetype('ipaexm.ttf', 60)
+    # font = ImageFont.truetype('ipaexm.ttf', 60)
+    font = ImageFont.truetype('ipaexm.ttf', 30)
     draw = ImageDraw.Draw(dst_img)
     fcolor = (255, 255, 255)
-    draw.text((cx0, cy0), "2024-09-28 極地研究所一般公開", font=font, stroke_width=2, fill=fcolor)
+    draw.text((cx0, cy0), "2026-10-03 極地研究所一般公開", font=font, stroke_width=1, fill=fcolor)
 
     # 画像出力
     fn = filename(nn)
@@ -82,7 +83,7 @@ def init_pages():
 def img_print(nn):
     # プリントアウト
     fn = filename(nn)
-    cmd = 'lpr %s  -o PageSize=Postcard' % fn
+    cmd = 'lpr %s  -o PageSize=Postcard -o InputSlot=Manual -o CNPrintOtherSide=False' % fn
     print(cmd)
     subprocess.call(cmd, shell=True)
 
@@ -101,10 +102,10 @@ def main():
             set_pages(nn)
         elif val == '1' or val == '2' or val == '3':
             nn = get_pages() - int(val)
-            if nn >= Page0:
-                img_print(nn)
-            else:
-                print("Invalid page")
+            # if nn >= Page0:
+            img_print(nn)
+            # else:
+            #   print("Invalid page")
             continue
         elif val == 'q':
             break
